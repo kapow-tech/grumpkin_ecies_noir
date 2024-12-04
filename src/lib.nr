@@ -67,7 +67,7 @@ pub fn encrypt(
     // let first_ciphertext = cipherText[0];
     // std::println(f"first_ciphertext=> {first_ciphertext}");
     // std::println(f"first_msg=> {first_msg}");
-    std::println(f"cipherText: {cipherText}");
+    // std::println(f"cipherText: {cipherText}");
 
     (gR, cipherText)
 }
