@@ -32,7 +32,6 @@ pub fn encrypt(
         msg: [Field; 32]
     ) -> (std::embedded_curve_ops::EmbeddedCurvePoint, [Field; 32]) {
     
-    std::println(f"test test ");
     // Create EmbeddedCurveScalar for ephemeral private key
     let ephemeral_scalar = EmbeddedCurveScalar::from_field(r);
     // let ephemeral_scalar = EmbeddedCurveScalar::new(r, 0);
