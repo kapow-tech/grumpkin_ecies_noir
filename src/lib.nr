@@ -60,9 +60,9 @@ pub fn encrypt(
     for i in 0..msg.len() {
         // let p_inputs = [gAR.x, i as Field];
         let p_inputs = [gAR.x];
-        // std::println(f"hashKey Inputs => {p_inputs}");
+        
         let hashKey = poseidon2::Poseidon2::hash(p_inputs, 1);
-        // std::println(f"poseidon2 hash=> {hashKey}");
+        
         cipherText[i] = msg[i] + hashKey;
     }
 

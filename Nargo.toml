@@ -1,6 +1,6 @@
 [package]
 name = "grumpkin_ecies_noir"
-version = "0.1.0"
+version = "0.4.0"
 authors = ["xaults <dev@xaults.com>"]
 edition = "2021"
 type = "lib"
