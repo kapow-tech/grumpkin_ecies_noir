@@ -78,19 +78,20 @@ pub fn encrypt(
 // Decrypt message
 pub fn decrypt(
         privkey: Field, 
-        cipher: (std::embedded_curve_ops::EmbeddedCurvePoint, [Field; 32])
+        ephemeralPubKey: std::embedded_curve_ops::EmbeddedCurvePoint,
+        cipherTxt: [Field; 32]
     ) -> [Field; 32] {
-    let (gR, cipherText) = cipher;
 
     let scalar = EmbeddedCurveScalar::from_field(privkey);  // Convert private key to EmbeddedCurveScalar
-    // Shared key: gAR
-    let gAR = std::embedded_curve_ops::multi_scalar_mul([gR], [scalar]);  // Use gR and scalar
+    
+    let gAR = std::embedded_curve_ops::multi_scalar_mul([ephemeralPubKey], [scalar]);  
 
     // Decrypt message
     let mut clearText = [0; 32];
-    for i in 0..cipherText.len() {
-        let hashKey = poseidon::bn254::hash_2([gAR.x, i as Field]);
-        clearText[i] = cipherText[i] - hashKey;
+    for i in 0..cipherTxt.len() {
+        let p_inputs = [gAR.x];
+        let hashKey = poseidon2::Poseidon2::hash(p_inputs, 1);
+        clearText[i] = cipherTxt[i] - hashKey;
     }
 
     clearText
